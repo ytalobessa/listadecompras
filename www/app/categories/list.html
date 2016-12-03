@@ -1,0 +1,18 @@
+<ion-view title="Categorias" cache-view="false">    
+    <ion-content class="has-header has-footer">
+        <ion-list class="list" can-swipe="true">
+            <ion-item ng-repeat="item in items" class="item">
+                <h2>{{ item.name }}</h2>
+
+                <ion-option-button class="ion-edit button-positive" ui-sref="menu.editCategory({ id: item.id})"></ion-option-button>
+                <ion-option-button class="ion-trash-a button-assertive" ng-click="delete($index, item.id)"></ion-option-button>
+            </ion-item>
+        </ion-list>
+        <!--<a ui-sref="menu.newCategory" style="border-radius:50px 50px 50px 50px;" class="button button-positive icon ion-android-add"></a>-->
+    </ion-content>
+    <ion-footer-bar class="bar-stable">
+        <button class="button" ui-sref="menu.newCategory">
+            <i class="icon ion-android-add"></i> Nova categoria
+        </button>
+    </ion-footer-bar>
+</ion-view>
