@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Novo produto</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form #form="ngForm" novalidate>
+        <ion-list>
+
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input type="text"
+                    required
+                    [(ngModel)]="model.nome" name="name" #name="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="name.errors && (name.dirty || name.touched)" class="text-danger">
+                <div [hidden]="!name.errors.required">
+                    O nome é obrigatório
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Quantidade</ion-label>
+                <ion-input type="number" min="0" step="1" required
+                    [(ngModel)]="model.quantidade" name="qtd" #qtd="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="qtd.errors && (qtd.dirty || qtd.touched)" class="text-danger">
+                <div [hidden]="!qtd.errors.required">
+                    A quantidade é obrigatória
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-6>
+                            <button ion-button block color="primary" (click)="addQtd()">
+                                <ion-icon name="add"></ion-icon>
+                            </button>
+                        </ion-col>
+                        <ion-col col-6>
+                            <button ion-button block color="primary" (click)="removeQtd()">
+                                <ion-icon name="remove"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Categoria</ion-label>
+                <ion-select cancelText="Cancelar" [(ngModel)]="model.categoriaId" required
+                    name="category" #category="ngModel">
+                    <ion-option value="-1">- Escolha -</ion-option>
+                    <ion-option *ngFor="let category of categories"
+                        value="{{ category.id }}">{{ category.nome }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="category.errors && (category.dirty || category.touched)" class="text-danger">
+                <div [hidden]="!category.errors.required">
+                    A categoria é obrigatória
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+        <div padding>
+            <button ion-button block color="primary"
+                [disabled]="!form.form.valid"
+                (click)="save()">Salvar</button>
+        </div>
+
+    </form>
+
+</ion-content>

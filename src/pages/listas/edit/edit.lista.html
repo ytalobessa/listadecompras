@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Nova lista</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form #form="ngForm" novalidate>
+        <ion-list>
+
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input type="text"
+                    required
+                    [(ngModel)]="model.nome" name="name" #name="ngModel"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="name.errors && (name.dirty || name.touched)" class="text-danger">
+                <div [hidden]="!name.errors.required">
+                    O nome é obrigatório
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+        <div padding>
+            <button ion-button block color="primary"
+                [disabled]="!form.form.valid"
+                (click)="save()">Salvar</button>
+        </div>
+    </form>
+
+</ion-content>
